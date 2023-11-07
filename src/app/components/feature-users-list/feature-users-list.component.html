@@ -1,0 +1,13 @@
+<div class="grid py-5 grid-cols-2 grid-rows-2 gap-5 mt-5 mb-5 items-center">
+  <div class="w-[300px] flex items-center justify-between py-2 px-4 border rounded" *ngFor="let user of users">
+    <a class="text-blue-500 hover:underline"
+    [routerLink]="['/user', user.id]">{{user.name}}</a>
+    <button class="hover:bg-orange-600 py-2 px-4 rounded bg-orange-400 text-white" type="button"
+            (click)="deleteUser(user.id)">
+      delete
+    </button>
+  </div>
+</div>
+
+
+

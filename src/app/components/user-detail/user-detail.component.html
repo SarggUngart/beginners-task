@@ -1,0 +1,25 @@
+<div class="border rounded flex justify-around items-center mt-10 py-5">
+
+  <div *ngIf="isLoading"><app-loader [isLoading]="isLoading"></app-loader></div>
+
+  <div *ngIf="user">
+    <div>
+      <p><b>name:</b> {{user.name}}</p>
+      <p><b>email:</b> {{user.email}}</p>
+      <p><b>city:</b> {{user.address.city}}</p>
+    </div>
+
+    <div>
+      <button class="hover:bg-orange-600 py-2 px-4 rounded bg-orange-400 text-white" type="button"
+              (click)="goBack()"
+      >go back
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
