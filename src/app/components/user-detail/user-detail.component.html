@@ -1,25 +1,27 @@
-<div class="border rounded flex justify-around items-center mt-10 py-5">
-
-  <div *ngIf="isLoading"><app-loader [isLoading]="isLoading"></app-loader></div>
-
-  <div *ngIf="user">
-    <div>
-      <p><b>name:</b> {{user.name}}</p>
-      <p><b>email:</b> {{user.email}}</p>
-      <p><b>city:</b> {{user.address.city}}</p>
-    </div>
-
-    <div>
-      <button class="hover:bg-orange-600 py-2 px-4 rounded bg-orange-400 text-white" type="button"
-              (click)="goBack()"
-      >go back
-      </button>
-    </div>
-
-  </div>
-</div>
+<mat-grid-list cols="1" rowHeight="4:1">
+  <mat-grid-tile>
+    <mat-card class="example-card">
 
 
+      <div *ngIf="user$ | async as user">
+        <mat-card-header>
+          <mat-card-title>{{user.name.firstname + ' ' + user.name.lastname}}</mat-card-title>
+          <mat-card-subtitle>city: {{user.address.city}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div><strong>phone:</strong> {{user.phone}}</div>
+          <div><strong>email:</strong> {{user.email}}</div>
+          <br>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at beatae consequatur cum distinctio
+            dolor, dolorum est ex expedita laborum molestiae molestias, officia pariatur praesentium qui, sit temporibus
+            ut voluptates?</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="goBack()" mat-button>Back</button>
+        </mat-card-actions>
+      </div>
 
-
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
 

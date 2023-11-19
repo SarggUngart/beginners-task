@@ -1,13 +1,29 @@
-<div class="grid py-5 grid-cols-2 grid-rows-2 gap-5 mt-5 mb-5 items-center">
-  <div class="w-[300px] flex items-center justify-between py-2 px-4 border rounded" *ngFor="let user of users">
-    <a class="text-blue-500 hover:underline"
-    [routerLink]="['/user', user.id]">{{user.name}}</a>
-    <button class="hover:bg-orange-600 py-2 px-4 rounded bg-orange-400 text-white" type="button"
-            (click)="deleteUser(user.id)">
-      delete
-    </button>
-  </div>
-</div>
+<main class="container m-auto">
+
+  <app-loader *ngIf="isLoading"></app-loader>
 
 
-
+  <mat-grid-list cols="4" rowHeight="4:2">
+    <app-search-input (searchEvent)="onSearch($event)"></app-search-input>
+    <mat-grid-tile *ngFor="let user of users$ | async ">
+      <mat-card class="mb-5">
+        <mat-card-header>
+          <mat-card-title>{{user.name.firstname + ' ' + user.name.lastname | titlecase}}</mat-card-title>
+          <mat-card-subtitle>id: {{user.id}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <a [routerLink]="['/user', user.id]">
+            <button mat-button>
+              <mat-icon>info</mat-icon>
+              Info
+            </button>
+          </a>
+          <button (click)="deleteUser(user.id)" mat-button>
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</main>

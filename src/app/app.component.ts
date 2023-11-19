@@ -8,6 +8,7 @@ import {UsersApiService} from "src/app/services/users-api.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent  {
-  title:string = 'Users'
+
+
 }
 

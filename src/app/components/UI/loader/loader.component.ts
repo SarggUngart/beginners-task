@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {UserI} from "src/app/interface/userI";
 
 @Component({
   selector: 'app-loader',
@@ -7,6 +8,5 @@ import {Component, Input} from '@angular/core';
 })
 export class LoaderComponent {
   @Input() isLoading!:boolean
-
-
+  @Input() user$?:UserI
 }

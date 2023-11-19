@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UserI} from "src/app/interface/userI";
+import {Component, inject, Input, OnInit} from '@angular/core';
 import {UsersApiService} from "src/app/services/users-api.service";
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
+import {UserI} from "src/app/interface/userI";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-user-detail',
@@ -10,32 +11,25 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./user-detail.component.scss']
 })
 export class UserDetailComponent implements OnInit {
-  user!: UserI
-  isLoading: boolean = true
+  user$: Observable<UserI | undefined>
+  route: ActivatedRoute = inject(ActivatedRoute);
+  userService = inject(UsersApiService)
 
-  constructor(private userService: UsersApiService,
-              private location: Location,
-              private route: ActivatedRoute
-  ) {
+  constructor(private location: Location) {
+    this.user$ = this.userService.currentUser$
   }
 
-  ngOnInit(): void {
-    this.getUser()
-
-  }
-
-  getUser(): void {
-    this.isLoading = true
-    const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.userService.getUserById(id).subscribe(user => {
-      this.user = user
-      this.isLoading = false
-    })
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const userId = +params['id'];
+      this.userService.getUserById(userId);
+    });
   }
 
   goBack(): void {
     this.location.back();
   }
+
 }
 
 
